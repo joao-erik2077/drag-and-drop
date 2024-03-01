@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+* {
+  font-family: 'Poppins';
+}
+
 html,
 body {
   height: 100vh;
@@ -11,10 +17,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fcfbfb;
 }
 
-.snap {
-  width: 10%;
+.item {
+  border: 2px dashed gray;
+  width: 15%;
   border-radius: 4px;
   padding: 2%;
   margin: 1rem 0 0 1rem;
@@ -24,6 +32,15 @@ body {
   touch-action: none;
   text-align: center;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 #add-button {
@@ -37,8 +54,34 @@ body {
   cursor: pointer;
 }
 
+#remove-all-button {
+  border: 0;
+  background-color: #ee2222;
+  color: #fff;
+  font-size: 1.1em;
+  padding: 1%;
+  border-radius: 4px;
+  margin: 15px 0;
+  cursor: pointer;
+}
+
 #grid {
   background-color: #c2e1f8;
   height: 100%;
   width: 100%;
+  border-top: 2px dashed gray;
+}
+
+.removeButton {
+  padding: 0;
+  border: 0;
+  color: #ff0000;
+  background-color: transparent;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.removeButton:hover {
+  color: #c00000;
 }
