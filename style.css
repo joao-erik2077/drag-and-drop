@@ -21,7 +21,7 @@ body {
 }
 
 .item {
-  /* border: 2px dashed gray; */
+  z-index: 2;
   min-width: 15%;
   border-radius: 4px;
   padding: 2%;
@@ -124,7 +124,7 @@ body {
 }
 
 .lines-focus {
-  color: #000000;
+  color: #808080;
 }
 
 .lines:hover {
