@@ -1,10 +1,11 @@
-const elements = [
+const gridSnaps = [
   { item: document.getElementById("grid-snap-1"), x: 0, y: 0 },
-  { item: document.getElementById("grid-snap-2"), x: 0, y: 0 },
+  { item: document.getElementById("grid-snap-2"), x: 0, y: 100 },
+  { item: document.getElementById("grid-snap-3"), x: 0, y: 200 },
 ];
 
-elements.forEach((element) =>
-  interact(element.item)
+gridSnaps.forEach((gridSnap) => {
+  interact(gridSnap.item)
     .draggable({
       modifiers: [
         interact.modifiers.snap({
@@ -13,7 +14,7 @@ elements.forEach((element) =>
           relativePoints: [{ x: 0, y: 0 }],
         }),
         interact.modifiers.restrict({
-          restriction: element.item.parentNode,
+          restriction: gridSnap.item.parentNode,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true,
         }),
@@ -21,9 +22,13 @@ elements.forEach((element) =>
       inertia: true,
     })
     .on("dragmove", function (event) {
-      element.x += event.dx;
-      element.y += event.dy;
+      gridSnap.x += event.dx;
+      gridSnap.y += event.dy;
 
-      event.target.style.transform = "translate(" + element.x + "px, " + element.y + "px)";
-    })
-);
+      event.target.style.transform =
+        "translate(" + gridSnap.x + "px, " + gridSnap.y + "px)";
+    });
+
+  gridSnap.item.style.transform =
+    "translate(" + gridSnap.x + "px, " + gridSnap.y + "px)";
+});
