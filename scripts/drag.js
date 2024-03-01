@@ -20,6 +20,7 @@ const startGrid = () => {
         inertia: true,
       })
       .on("dragmove", (event) => {
+        updateLines(gridItem.id);
         gridItem.x += event.dx;
         gridItem.y += event.dy;
 

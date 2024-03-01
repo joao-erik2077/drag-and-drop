@@ -1,7 +1,7 @@
 const addButton = document.getElementById("add-button");
 const removeAllButton = document.getElementById("remove-all-button");
 const grid = document.getElementById("grid");
-let lastId = 0;
+let currentId = 0;
 
 const resize = (id) => {
   const editInput = document.getElementById(`edit-input-${id}`);
@@ -11,18 +11,21 @@ const resize = (id) => {
 
 addButton.addEventListener("click", () => {
   const newGridItem = document.createElement("div");
-  newGridItem.setAttribute("id", `grid-item-${lastId}`);
+  newGridItem.setAttribute("id", `grid-item-${currentId}`);
   newGridItem.setAttribute("class", "item");
 
   const removeIcon = "<i class='bi bi-x'></i>";
-  const removeButton = `<button class="removeButton" onclick="removeItem(${lastId})">${removeIcon}</button>`;
-  const editIcon = `<i class='bi bi-pencil' id='icon-${lastId}'></i>`;
-  const editButton = `<button class="editButton" onclick="editItem(${lastId})">${editIcon}</button>`;
+  const removeButton = `<button class="removeButton" onclick="removeItem(${currentId})">${removeIcon}</button>`;
+  const editIcon = `<i class='bi bi-pencil' id='icon-${currentId}'></i>`;
+  const editButton = `<button class="editButton" onclick="editItem(${currentId})">${editIcon}</button>`;
   const buttons = `<div class='itemButtons'>${editButton} ${removeButton}</div>`;
   const text = "Drag me";
-  const insideText = `<input style="width: ${text.length}ch;" disabled="true" type="text" class="insideText" value="${text}" id="edit-input-${lastId}" oninput="resize(${lastId})">`;
+  const insideText = `<input style="width: ${text.length}ch;" disabled="true" type="text" class="insideText" value="${text}" id="edit-input-${currentId}" oninput="resize(${currentId})">`;
 
-  newGridItem.innerHTML = `${insideText} ${buttons}`;
+  const inputLine = `<i class='bi bi-arrow-right lines-left lines' onclick='setInputLine(${currentId})' id='input-line-${currentId}'></i>`;
+  const outputLine = `<i class='bi bi-arrow-right lines-right lines' onclick='setOutputLine(${currentId})' id='output-line-${currentId}'></i>`;
+
+  newGridItem.innerHTML = `${inputLine} ${insideText} ${buttons} ${outputLine}`;
   grid.appendChild(newGridItem);
 
   gridItems.push({
@@ -30,16 +33,15 @@ addButton.addEventListener("click", () => {
     x: 0,
     y: 0,
     initiated: false,
-    id: lastId,
+    id: currentId,
   });
-  lastId++;
+  currentId++;
   startGrid();
 });
 
 const removeItem = (id) => {
   let found = false;
   for (let i = 0; !found; i++) {
-    console.log(gridItems[i].id, id);
     if (gridItems[i].id === id) {
       found = true;
       item = gridItems[i];
@@ -47,12 +49,13 @@ const removeItem = (id) => {
       gridItems = gridItems.filter((e) => e.id !== id);
     }
   }
-  console.log(gridItems);
+  removeLines(id);
 };
 
 removeAllButton.addEventListener("click", () => {
   gridItems = [];
   grid.innerHTML = "";
+  removeAllLines();
 });
 
 const editItem = (id) => {

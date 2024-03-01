@@ -21,7 +21,7 @@ body {
 }
 
 .item {
-  border: 2px dashed gray;
+  /* border: 2px dashed gray; */
   min-width: 15%;
   border-radius: 4px;
   padding: 2%;
@@ -67,7 +67,7 @@ body {
   background-color: #c2e1f8;
   height: 100%;
   width: 100%;
-  border-top: 2px dashed gray;
+  border-top: 2px dashed #808080;
 }
 
 .itemButtons {
@@ -80,7 +80,7 @@ body {
   border: 0;
   color: #ff0000;
   background-color: transparent;
-  font-size: 3rem;
+  font-size: 2rem;
   cursor: pointer;
   transition: .2s;
 }
@@ -94,7 +94,7 @@ body {
   border: 0;
   color: #eeff00;
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: .2s;
 }
@@ -104,12 +104,37 @@ body {
 }
 
 .insideText {
+  min-width: 15ch;
   font-family: monospace;
   background-color: transparent;
   border: 0;
   resize: none;
-  font-size: 2rem;
+  font-size: 1rem;
   color: #fff;
   outline: 0;
-  margin-right: 2rem;
+  margin-right: .4rem;
+}
+
+.lines {
+  font-size: 1.5rem;
+  position: absolute;
+  cursor: pointer;
+  color: transparent;
+  transition: .2s;
+}
+
+.lines-focus {
+  color: #000000;
+}
+
+.lines:hover {
+  color: #808080;
+}
+
+.lines-left {
+  left: -5%;
+}
+
+.lines-right {
+  right: -5%;
 }
